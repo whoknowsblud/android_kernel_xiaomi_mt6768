@@ -1025,31 +1025,23 @@ static void __exit mt_charger_det_exit(void)
 	platform_driver_unregister(&mt_charger_driver);
 }
 
-subsys_initcall(mt_charger_det_init);
-module_exit(mt_charger_det_exit);
+/* --- FIXES PARA STORM_BREAKER --- */
 
-/* --- SECCIÓN DE FIXES PARA STORM_BREAKER / REV 05 --- */
+// 1. Símbolos que faltaban (is_otg ya existe arriba, así que solo definimos si falla)
+// Si el linker vuelve a quejarse de is_otg, descomenta la siguiente línea:
+// int is_otg = 0; 
 
-// 1. Definimos las variables que el linker no encuentra
-int is_otg = 0;
 bool usb_otg = false;
 enum hvdcp_status hvdcp_type_tmp = 0;
 
-// 2. Definimos los stubs de las funciones del SMB1351
-// Esto evita el error de "undefined reference" sin tocar otros archivos
+// 2. Funciones que el linker busca pero no encuentra (Stubs)
 void Charger_Detect_Init(void) {}
 void Charger_Detect_Release(void) {}
 void kick_usb_vbus_sm(void) {}
 void smb1351_enable_chg_type_det(bool en) {}
 void apsd_update_work(struct work_struct *work) {}
 
-// 3. El driver busca esta función para la carga reversa
-// La dejamos vacía para que no intente apagar el cargador real
-void reverse_charger(bool en) {
-    pr_info("StormBreaker: Reverse charger stub called (en: %d)\n", en);
-}
-
-/* --- FIN DE LA SECCIÓN DE FIXES --- */
+/* --- CIERRE DEL MÓDULO (SOLO UNA VEZ) --- */
 
 subsys_initcall(mt_charger_det_init);
 module_exit(mt_charger_det_exit);
