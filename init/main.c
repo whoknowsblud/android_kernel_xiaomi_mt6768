@@ -1164,13 +1164,3 @@ static noinline void __init kernel_init_freeable(void)
 	integrity_load_keys();
 	load_default_modules();
 }
-
-/* ——————————————————————————————————————————————————
- * BYPASS PARA ERRORES DE LINKER (is_otg / Charger)
- * Estas funciones satisfacen al linker para que la build termine.
- * —————————————————————————————————————————————————— */
-int is_otg(void) { return 0; }
-void Charger_Detect_Init(void) {}
-void Charger_Detect_Release(void) {}
-void kick_usb_vbus_sm(void) {}
-void smb1351_enable_chg_type_det(int en) {}
