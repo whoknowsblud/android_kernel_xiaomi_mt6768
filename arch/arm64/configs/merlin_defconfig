@@ -547,5 +547,34 @@ CONFIG_DAMON_SYSFS=y
 CONFIG_DAMON_RECLAIM=y
 CONFIG_LD_DEAD_CODE_DATA_ELIMINATION=y
 
+# ==========================================
+# REPLANTEAMIENTO TOTAL: MODO LZO ACTIVADO
+# ==========================================
+
+# 1. Asegurar que LZO esté disponible en el Kernel
+CONFIG_CRYPTO_LZO=y
+CONFIG_LZO_COMPRESS=y
+CONFIG_LZO_DECOMPRESS=y
+
+# 2. Configurar ZRAM para que use LZO por defecto
+CONFIG_ZRAM_LZO_COMPRESS=y
+# CONFIG_ZRAM_LZ4_COMPRESS is not set
+# CONFIG_ZRAM_ZSTD_COMPRESS is not set
+
+# 3. Forzar al Kernel a comprimirse en LZO (Opcional pero recomendado para booteo rápido)
+CONFIG_KERNEL_LZO=y
+# CONFIG_KERNEL_GZIP is not set
+# CONFIG_KERNEL_LZ4 is not set
+
+# 4. Limpieza de drivers conflictivos (Fix de los errores previos)
+# CONFIG_CHARGER_SMB1351 is not set
+# CONFIG_BATTERY_SMB1351 is not set
+
+# 5. Apagar LZ4 de raíz (Adiós Stack Frame Warning)
+# CONFIG_CRYPTO_LZ4 is not set
+# CONFIG_CRYPTO_LZ4HC is not set
+# CONFIG_LZ4_COMPRESS is not set
+# CONFIG_LZ4HC_COMPRESS is not set
+
 CONFIG_OVERLAY_FS=y
 CONFIG_TMPFS_XATTR=y
