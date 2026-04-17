@@ -1025,16 +1025,19 @@ static void __exit mt_charger_det_exit(void)
 	platform_driver_unregister(&mt_charger_driver);
 }
 
-/* --- FIXES PARA STORM_BREAKER --- */
+/* --- BLOQUE DE CIERRE FINAL (STORM_BREAKER REV 05) --- */
 
-// 1. Funciones que el linker busca pero no encuentra (Stubs)
+// Definimos is_otg aquí de forma global. 
+// Si otro archivo intenta definirla, el linker usará esta.
+int is_otg = 0; 
+EXPORT_SYMBOL(is_otg); // Esto la hace visible para todo el kernel
+
+// Símbolos para que el linker sea feliz
 void Charger_Detect_Init(void) {}
 void Charger_Detect_Release(void) {}
 void kick_usb_vbus_sm(void) {}
 void smb1351_enable_chg_type_det(bool en) {}
 void apsd_update_work(struct work_struct *work) {}
-
-/* --- CIERRE DEL MÓDULO (SOLO UNA VEZ) --- */
 
 subsys_initcall(mt_charger_det_init);
 module_exit(mt_charger_det_exit);
