@@ -185,6 +185,14 @@ config ARM64_PAGE_SHIFT
 	default 14 if ARM64_16K_PAGES
 	default 12
 
+config 16KSTACKS
+	bool "16K kernel stacks"
+	default y
+	help
+	  Enable this to increase the kernel stack size from 8KB to 16KB.
+	  This is useful to prevent stack overflows with complex drivers 
+	  or compression algorithms like LZ4.
+
 config ARM64_CONT_SHIFT
 	int
 	default 5 if ARM64_64K_PAGES
