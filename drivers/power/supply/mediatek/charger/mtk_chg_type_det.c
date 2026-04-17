@@ -1027,14 +1027,7 @@ static void __exit mt_charger_det_exit(void)
 
 /* --- FIXES PARA STORM_BREAKER --- */
 
-// 1. Símbolos que faltaban (is_otg ya existe arriba, así que solo definimos si falla)
-// Si el linker vuelve a quejarse de is_otg, descomenta la siguiente línea:
-// int is_otg = 0; 
-
-bool usb_otg = false;
-enum hvdcp_status hvdcp_type_tmp = 0;
-
-// 2. Funciones que el linker busca pero no encuentra (Stubs)
+// 1. Funciones que el linker busca pero no encuentra (Stubs)
 void Charger_Detect_Init(void) {}
 void Charger_Detect_Release(void) {}
 void kick_usb_vbus_sm(void) {}
