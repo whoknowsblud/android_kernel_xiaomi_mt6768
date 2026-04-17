@@ -1174,5 +1174,3 @@ void Charger_Detect_Init(void) {}
 void Charger_Detect_Release(void) {}
 void kick_usb_vbus_sm(void) {}
 void smb1351_enable_chg_type_det(int en) {}
-void apsd_update_work(void *work) {}
-void reverse_charger(void *data) {}
