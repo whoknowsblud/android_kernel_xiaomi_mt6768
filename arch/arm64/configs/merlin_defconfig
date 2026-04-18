@@ -550,22 +550,13 @@ CONFIG_LD_DEAD_CODE_DATA_ELIMINATION=y
 # Ratio de Respuesta (El motor a 1000Hz)
 CONFIG_HZ_1000=y
 CONFIG_HZ=1000
-CONFIG_PREEMPT=y
 
 # Gestión de Memoria para 3GB
-CONFIG_SLUB=y
-# CONFIG_SLUB_DEBUG is not set
-CONFIG_PSI=y
 CONFIG_ZRAM_BTREE=y
 
 # --- Motores Multimedia (Necesarios para el Linker) ---
 CONFIG_ION=y
 CONFIG_ION_MTK=y
 CONFIG_ION_MTK_HELPER=y
-
-# --- Command Queue (Necesario para Display/Cámara) ---
-CONFIG_MTK_CMDQ=y
-CONFIG_MTK_GCE=y
-CONFIG_MTK_CMDQ_MBOX=y
 CONFIG_OVERLAY_FS=y
 CONFIG_TMPFS_XATTR=y
